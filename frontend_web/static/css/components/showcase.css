@@ -1,0 +1,46 @@
+.showcase-card .images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.showcase-card img {
+  max-width: 80%;
+}
+.showcase-card .image-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.showcase-card .image-wrap p {
+  padding: 0.4rem 0;
+  font-size: 0.7em;
+}
+.showcase-card {
+  width: 100%;
+}
+.showcase-card .category {
+  padding: 0.4rem 0rem;
+  display: flex;
+  justify-content: center;
+}
+.showcase-card .category button {
+  background: none;
+  border: none;
+  background: rgb(240, 240, 240);
+  display: block;
+  width: 100%;
+  padding: 0.3rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .showcase-card .images {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

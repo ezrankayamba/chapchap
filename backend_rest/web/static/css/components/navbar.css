@@ -1,0 +1,30 @@
+:root {
+  --navbar-bg-color: #ffffff;
+  --navbar-color: #333;
+}
+.navbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  background: var(--navbar-bg-color);
+  color: var(--navbar-color);
+  padding: 0.4rem 0.4rem;
+  filter: drop-shadow(0 0 2px 0 rgb(64, 63, 65));
+  box-shadow: 0 0 1px #999;
+  width: 100%;
+}
+.navbar button {
+  background: none;
+  border: none;
+}
+.navbar .title {
+  padding: 0 1rem;
+  font-weight: bolder;
+}
+.navbar .buttons button {
+  margin: 0 0.4rem;
+}
+.main-content {
+  padding: 0.4rem;
+  margin-top: 2.5rem;
+}

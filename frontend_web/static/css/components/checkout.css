@@ -1,0 +1,62 @@
+.checkout-page {
+  padding: 0.4rem;
+}
+
+.checkout-item {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  border-bottom: 1px solid #ddd;
+  padding-top: 0.4rem;
+}
+.checkout-item :last-child {
+  text-align: right;
+}
+.checkout-item.total {
+  font-weight: bold;
+  border-bottom: none;
+  padding: 0.4rem 0;
+}
+.delivery-address {
+  margin-top: 1rem;
+  border: 1px solid #ddd;
+  padding: 0.4rem;
+  border-radius: 0.4rem;
+}
+.delivery-address form {
+  padding: 0.4rem 0;
+  font-size: 0.8rem;
+}
+.delivery-address label {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin-top: 0.4rem;
+}
+.delivery-address .buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+.checkout-content {
+  margin-top: 1rem;
+}
+
+.checkout-page.success h5 {
+  color: #3f3;
+  margin: 1rem 0;
+}
+.checkout-page.success p {
+  font-size: 0.8rem;
+}
+.checkout-page.success button {
+  margin: 1rem 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .checkout-page {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

@@ -1,0 +1,13 @@
+.categories-wrap {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+}
+.categories-wrap img {
+  max-width: 100%;
+}
+.categories-wrap button {
+  width: 100%;
+}

@@ -1,0 +1,11 @@
+.main-content-wraper {
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
+}
+@media only screen and (min-width: 768px) {
+  .main-layout {
+    width: 80vw;
+    margin: auto;
+    height: 100vh;
+  }
+}
