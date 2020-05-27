@@ -14,7 +14,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "192.168.99.101",
     "77.73.68.233",
-    "shop.nezatech.co.tz"
+    "chap.nezatech.co.tz",
 ]
 
 
