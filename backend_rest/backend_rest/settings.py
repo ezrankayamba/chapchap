@@ -14,7 +14,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "192.168.99.101",
     "77.73.68.233",
-    "shop.nezatech.co.tz",
+    "shop.nezatech.co.tz"
 ]
 
 
@@ -23,7 +23,7 @@ ALLOWED_HOSTS = [
 INSTALLED_APPS = [
     "web.apps.WebConfig",
     "users.apps.UsersConfig",
-    "shop.apps.ShopConfig",
+    "websocket.apps.WebSocketConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "django_filters",
     "oauth2_provider",
     "corsheaders",
+    "channels",
 ]
 
 MIDDLEWARE = [
@@ -66,7 +67,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "backend_rest.wsgi.application"
-
+# Channels
+ASGI_APPLICATION = "backend_rest.routing.application"
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {"hosts": [("127.0.0.1", 6379)],},
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases

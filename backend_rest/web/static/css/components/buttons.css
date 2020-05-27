@@ -2,7 +2,11 @@
   --button-color: #2196f3;
   --button-secondary-color: rgb(4, 5, 39);
 }
-
+button {
+  border: 1px solid #ddd;
+  padding: 0.4rem;
+  border-radius: 0.2rem;
+}
 .buttons-container {
   display: flex;
 }
@@ -48,6 +52,10 @@
 .btn.btn-outline-secondary {
   background: transparent;
   border: 1px solid #f8f4f4;
+  color: var(--button-secondary-color);
+}
+.btn.btn-secondary {
+  background: #f8f4f4;
   color: var(--button-secondary-color);
 }
 .btn.btn-outline-primary {

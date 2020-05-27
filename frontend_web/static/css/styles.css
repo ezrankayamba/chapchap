@@ -20,6 +20,7 @@
 @import "./components/icons.css";
 @import "./components/layout.css";
 @import "./components/checkout.css";
+@import "./components/chat.css";
 
 :root {
   --brand-color: #60d3eb;

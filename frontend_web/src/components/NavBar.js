@@ -2,6 +2,7 @@ import React from "react";
 import Icon from "../_helpers/Icon";
 import { connect } from "react-redux";
 import { updateCart } from "../redux/shop/actions";
+import { APP_NAME } from "../conf";
 
 @connect(
   (state) => {
@@ -11,7 +12,6 @@ import { updateCart } from "../redux/shop/actions";
 )
 class NavBar extends React.Component {
   render() {
-    console.log(this.props);
     const { cart } = this.props;
     const cartSize = cart
       ? cart.reduce((prev, current) => prev + current.quantity, 0)
@@ -25,7 +25,7 @@ class NavBar extends React.Component {
         <div className="title">
           <h3>
             <a href="/" className="btn btn-link-secondary btn-sm ">
-              OnlineShop
+              {APP_NAME}
             </a>
           </h3>
         </div>
@@ -36,10 +36,6 @@ class NavBar extends React.Component {
           <button>
             <Icon name="person_outline" />
           </button>
-          <a className="btn btn-sm btn-link-secondary cart-button" href="/cart">
-            <Icon name="shopping_cart" />
-            <i className="cart-count">{cartSize}</i>
-          </a>
         </div>
       </div>
     );

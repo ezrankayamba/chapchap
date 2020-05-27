@@ -5,11 +5,9 @@ let shop = getInitialData("shop");
 if (!shop) {
   shop = { cart: [] };
 }
-console.log("New Shop?", shop);
 let initialState = shop;
 
 let shopReducer = (state = initialState, { type, payload }) => {
-  console.log(type, payload);
   const updateExisting = (cart, payload) => {
     return cart.map((item) =>
       item.product.id === payload.product.id ? { ...payload } : item

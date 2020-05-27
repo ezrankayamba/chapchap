@@ -4,6 +4,8 @@ import Icon from "../../_helpers/Icon";
 import MatIcon from "../MatIcon";
 import CartPage from "../../pages/shop/CartPage";
 import CheckoutPage from "../../pages/shop/CheckoutPage";
+import ChatRoom from "../chat/ChatRoom";
+import ChatRooms from "../../pages/chatroom/ChatRooms";
 
 const getMenus = (loggedIn, privileges) => {
   let pFilter = (m) => {
@@ -24,38 +26,24 @@ const getMenus = (loggedIn, privileges) => {
           Icon: () => <MatIcon name="home" />,
           privilege: "Anonymous",
         },
-        {
-          id: getId(),
-          path: "/home",
-          name: "Home",
-          component: MainPage,
-          Icon: () => <MatIcon name="shopping_cart" />,
-          privilege: "Anonymous",
-        },
       ]
     : [
         {
           id: getId(),
           path: "/home",
           name: "Home",
+          exact: true,
           component: MainPage,
           Icon: () => <MatIcon name="home" />,
           privilege: "Anonymous",
         },
         {
           id: getId(),
-          path: "/cart",
-          name: "Cart",
-          component: CartPage,
-          Icon: () => <MatIcon name="shopping_cart" />,
-          privilege: "Anonymous",
-        },
-        {
-          id: getId(),
-          path: "/checkout",
-          name: "Checkout",
-          component: CheckoutPage,
-          Icon: () => <MatIcon name="payment" />,
+          path: "/chatrooms",
+          name: "Chat Rooms",
+          component: ChatRooms,
+          exact: false,
+          Icon: () => <MatIcon name="home" />,
           privilege: "Anonymous",
         },
       ];

@@ -4,8 +4,14 @@
 }
 @media only screen and (min-width: 768px) {
   .main-layout {
-    width: 80vw;
+    width: 100%;
     margin: auto;
     height: 100vh;
+  }
+  .main-content-wraper {
+    width: 70%;
+    margin: 0 auto;
+    padding: 0.4rem;
+    height: 100%;
   }
 }
