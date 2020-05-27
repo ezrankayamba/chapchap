@@ -28,6 +28,7 @@ module.exports = {
   ],
   output: {
     filename: "static/[name].bundle.js",
+    publicPath: "/",
     path: path.resolve(__dirname, "../backend_rest/web/static"),
   },
 };
