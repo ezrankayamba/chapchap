@@ -4,7 +4,7 @@ import UUID from "../../_helpers/UUID";
 import WebRTC from "./WebRTC";
 const constraints = {
   video: true,
-  audio: false,
+  audio: true,
 };
 
 function ChatRoom() {
