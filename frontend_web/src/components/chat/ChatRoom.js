@@ -3,11 +3,7 @@ import WsHandler from "../../_helpers/WsHandler";
 import UUID from "../../_helpers/UUID";
 import WebRTC from "./WebRTC";
 const constraints = {
-  video: {
-    width: 360,
-    height: 240,
-    frameRate: { max: 30 },
-  },
+  video: true,
   audio: false,
 };
 
