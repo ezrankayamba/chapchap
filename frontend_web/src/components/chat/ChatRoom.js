@@ -4,8 +4,8 @@ import UUID from "../../_helpers/UUID";
 import WebRTC from "./WebRTC";
 const constraints = {
   video: {
-    width: { max: 320 },
-    height: { max: 240 },
+    width: 360,
+    height: 240,
     frameRate: { max: 30 },
   },
   audio: false,
