@@ -48,17 +48,18 @@
 #screens .video-wrap {
   display: flex;
   flex-direction: column;
+  background: #eee;
+  align-items: center;
 }
 .video-wrap p {
   padding: 0.4rem;
-  background: #eee;
   display: block;
   text-align: center;
 }
 .video-wrap video {
   font-size: 0.6em;
   padding: 0.4rem;
-  background: #eee;
   display: block;
   width: 100%;
+  max-height: 240px;
 }
