@@ -18,10 +18,11 @@ function ChatRoom() {
   let localStream;
 
   const createVideo = (uuid) => {
+    let parts = uuid.split("-");
     let template = document.createElement("template");
     let html = `
     <div id="${uuid}" class="video-wrap">
-        <b>You: ${uuid}</b>
+        <p>You: ${parts[parts.length - 1]}</p>
         <video></video>
     </div>
     `;
@@ -136,12 +137,13 @@ function ChatRoom() {
   useEffect(() => {
     start();
   }, []);
+  let parts = localUuid.split("-");
   return (
     <div className="chat-room">
       <h5>Chat room</h5>
       <div id="screens" class="videos">
         <div id="me" class="video-wrap">
-          <b>Me: {localUuid}</b>
+          <p>Me: {parts[parts.length - 1]}</p>
           <video></video>
         </div>
       </div>
