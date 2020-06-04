@@ -1,7 +1,6 @@
 import { WS_URL } from "../conf";
 import DataType from "./DataType";
-let cache;
-const WsHandler = ({ onMessage, onConnect }) => {
+const WsHandler = (onMessage, onConnect) => {
   let url = WS_URL;
   const connection = new WebSocket(url);
   connection.onopen = onConnect;

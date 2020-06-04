@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     "web.apps.WebConfig",
     "users.apps.UsersConfig",
     "websocket.apps.WebSocketConfig",
+	"channels",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -34,7 +35,7 @@ INSTALLED_APPS = [
     "django_filters",
     "oauth2_provider",
     "corsheaders",
-    "channels",
+    
 ]
 
 MIDDLEWARE = [

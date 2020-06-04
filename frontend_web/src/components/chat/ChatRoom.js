@@ -1,94 +1,35 @@
 import React, { useEffect } from "react";
-import WsHandler from "../../_helpers/WsHandler";
 import UUID from "../../_helpers/UUID";
-import WebRTC from "./WebRTC";
+import RTCSinaling from "./RTCSinaling";
+import RTCSession from "./RTCSession";
 const constraints = {
   video: true,
-  audio: true,
+  audio: false,
 };
 
 function ChatRoom() {
   const localUuid = UUID.get();
-  let peers = [];
-  let ws;
-  let localStream;
+  const session = new RTCSession(localUuid);
 
-  const createVideo = (uuid) => {
-    let parts = uuid.split("-");
-    let template = document.createElement("template");
-    let html = `
-    <div id="${uuid}" class="video-wrap">
-        <p>You: ${parts[parts.length - 1]}</p>
-        <video></video>
-    </div>
-    `;
-
-    html = html.trim(); // Never return a text node of whitespace as the result
-    template.innerHTML = html;
-    return template.content.firstChild;
-  };
-  function startRTC(peer, initiator = false, data) {
-    let rtc = WebRTC(localStream, send, peer, initiator, data);
-    peers = peers.map((p) => (p.uuid === peer.uuid ? { ...p, pc: rtc } : peer));
-  }
-  const handleJoined = (uuid, ack = false) => {
-    let peer = peers.find((p) => p.uuid === uuid);
-    if (!peer) {
-      peer = { uuid: uuid };
-      peers.push(peer);
-      let screens = document.querySelector("#screens");
-      let wrap = createVideo(uuid);
-      screens.appendChild(wrap);
-    }
-    if (!ack) {
-      send("join_ack", uuid);
-      startRTC(peer, true);
-    }
-  };
-
-  const send = (type, dest, data) => {
-    ws.send({
-      uuid: localUuid,
-      dest,
-      data,
-      type,
-    });
-  };
-  const log = (msg) => {
-    let now = new Date().toLocaleString();
-    console.log(`${now} - ${msg}`);
-  };
-  const handleVideoOffer = (uuid, data) => {
-    let peer = peers.find((p) => p.uuid === uuid);
-    startRTC(peer, false, data);
-  };
-  const handleVideoAnswer = (uuid, data) => {
-    let peer = peers.find((p) => p.uuid === uuid);
-    if (peer && peer.pc && data) {
-      peer.pc.handleAnswer(data);
-    }
-  };
-  const handleNewIceCandicate = (uuid, data) => {
-    let peer = peers.find((p) => p.uuid === uuid);
-    if (peer && peer.pc && data) {
-      peer.pc.handleNewCanditate(data);
-    }
-  };
   const handleMessage = ({ uuid, type, data }) => {
+    console.log("\n\n", uuid, type, data, "\n\n");
     switch (type) {
+      case "negotiate":
+        session.handleNegotiate(uuid, data);
+        break;
       case "joined":
-        handleJoined(uuid);
+        session.handleJoined(uuid);
       case "join_ack":
-        handleJoined(uuid, true);
+        session.handleJoined(uuid, true);
         break;
       case "video-offer":
-        handleVideoOffer(uuid, data);
+        session.handleVideoOffer(uuid, data);
         break;
       case "video-answer":
-        handleVideoAnswer(uuid, data);
+        session.handleVideoAnswer(uuid, data);
         break;
       case "new-ice-candidate":
-        handleNewIceCandicate(uuid, data);
+        session.handleNewIceCandicate(uuid, data);
         break;
       default:
         console.log("Not handled", type, data);
@@ -102,32 +43,20 @@ function ChatRoom() {
       navigator.mediaDevices
         .getUserMedia(constraints)
         .then((stream) => {
-          localStream = stream;
           let video = document.querySelector("#me video");
           video.srcObject = stream;
-          video.play();
-          initWs();
+          video.onloadedmetadata = function () {
+            video.play();
+          };
+          let sig = new RTCSinaling(localUuid);
+          sig.init(handleMessage);
+          session.sig = sig;
+          session.localStream = stream;
         })
         .catch(errorHandler);
     } else {
       alert("Your browser does not support getUserMedia API");
     }
-  }
-
-  function initWs() {
-    ws = WsHandler({
-      onMessage: (sig) => {
-        if (
-          (sig.dest === "all" || sig.dest === localUuid) &&
-          sig.uuid !== localUuid
-        ) {
-          handleMessage(sig);
-        }
-      },
-      onConnect: () => {
-        send("joined", "all");
-      },
-    });
   }
 
   useEffect(() => {

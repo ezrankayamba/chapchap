@@ -1,6 +1,9 @@
 let numOr0 = (n) => (isNaN(n) ? 0 : parseFloat(n));
 
 const Numbers = {
+  random: (min = 1, max = 2) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  },
   fmt: (num) => num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"),
   sum: (nums) => nums.reduce((a, b) => numOr0(a) + numOr0(b), 0),
   guid: () => {
