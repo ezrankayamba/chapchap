@@ -19,23 +19,25 @@ class NavBar extends React.Component {
     // const cartSize = 10;
     return (
       <div className="navbar">
-        <button className="menu">
-          <Icon name="menu" />
-        </button>
-        <div className="title">
-          <h3>
-            <a href="/" className="btn btn-link-secondary btn-sm ">
-              {APP_NAME}
-            </a>
-          </h3>
-        </div>
-        <div className="buttons">
-          <button>
-            <Icon name="search" />
+        <div className="navbar-wrap">
+          <button className="menu">
+            <Icon name="menu" />
           </button>
-          <button>
-            <Icon name="person_outline" />
-          </button>
+          <div className="title">
+            <h3>
+              <a href="/" className="btn btn-link-secondary btn-sm ">
+                {APP_NAME}
+              </a>
+            </h3>
+          </div>
+          <div className="buttons">
+            <button>
+              <Icon name="search" />
+            </button>
+            <button>
+              <Icon name="person_outline" />
+            </button>
+          </div>
         </div>
       </div>
     );

@@ -1,7 +1,7 @@
 .call-setup {
   padding: 0.4rem;
 }
-.call-setup .label-input-button {
+.label-input-button {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   align-items: center;

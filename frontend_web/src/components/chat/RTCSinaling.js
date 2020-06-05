@@ -9,19 +9,19 @@ class RTCSinaling {
     this.connect = this.connect.bind(this);
     this.init = this.init.bind(this);
   }
-  init(handleMessage) {
+  init(handleMessage, name) {
     this.handleMessage = handleMessage;
+    this.name = name;
     this.ws = WsHandler(this.received, this.connect);
   }
   connect() {
-    this.send("negotiate", "all", { flag: Numbers.random() });
+    this.send("negotiate", "all", { flag: Numbers.random(), name: this.name });
   }
   received(sig) {
     if (
       (sig.dest === "all" || sig.dest === this.localUuid) &&
       sig.uuid !== this.localUuid
     ) {
-      console.log(sig);
       this.handleMessage(sig);
     }
   }

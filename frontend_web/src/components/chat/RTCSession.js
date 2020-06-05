@@ -25,29 +25,54 @@ class RTCSession {
     peer.pc = rtc;
     this.updatePeer(peer);
   }
-  handleNegotiate(uuid, { flag }) {
+  handleNegotiate(uuid, { flag, name, ...rest }) {
+    console.log("Negotiating: ", uuid, flag, name, rest);
     let peer = this.peers.find((p) => p.uuid === uuid);
     if (!peer) {
-      peer = { uuid: uuid, flag: Numbers.random() };
-      this.updatePeer(peer);
-    }
-    if (peer.flag !== flag) {
-      console.log("Negotiation complete: ", peer);
-      peer.status = 1;
-      this.startRTC(peer, true);
-    } else {
-      console.log("Continue negotioation: ", peer);
       let newFlag = Numbers.random();
-      peer.flag = newFlag;
+      peer = { uuid: uuid, flag: newFlag, name: name };
       this.updatePeer(peer);
-      this.sig.send("negotiate", peer.uuid, { flag: newFlag });
+      this.sig.send("negotiate", peer.uuid, {
+        flag: newFlag,
+        name: this.sig.name,
+      });
+    } else {
+      let type = "negotiate";
+      let myFlag = peer.flag || Numbers.random();
+      if (peer.flag !== flag && name) {
+        console.log("Negotiation complete: ", peer);
+        peer.status = 1;
+        type = "negotiate_ack";
+      } else {
+        console.log("Continue negotioation: ", peer);
+        myFlag = Numbers.random();
+      }
+      peer.name = name || peer.name;
+      peer.flag = myFlag;
+      this.updatePeer(peer);
+      this.sig.send(type, peer.uuid, {
+        flag: myFlag,
+        name: this.sig.name,
+      });
     }
+  }
+  handleNegotiateAck(uuid, { flag, name, ...rest }) {
+    let peer = this.peers.find((p) => p.uuid === uuid);
+    if (!peer) {
+      let newFlag = flag === 1 ? 2 : 1;
+      peer = { uuid: uuid, flag: newFlag, name: name };
+      this.updatePeer(peer);
+    }
+    console.log("Negotiation complete Ack: ", peer);
+    peer.status = 1;
+    peer.name = name || peer.name;
+    this.startRTC(peer, true);
   }
 
   handleVideoOffer(uuid, data) {
     let peer = this.peers.find((p) => p.uuid === uuid);
     console.log(uuid, data);
-    if (!peer) {
+    if (!peer || !peer.pc) {
       peer = { uuid: uuid, flag: Numbers.random() };
       this.startRTC(peer, false);
     }

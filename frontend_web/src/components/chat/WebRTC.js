@@ -5,9 +5,7 @@ const configuration = {
 };
 
 function WebRTC(localStream, send, peer, initiator) {
-  console.log("Me as initiator: ", initiator, peer);
   const pc = new RTCPeerConnection(configuration);
-
   pc.onicecandidate = (e) => {
     if (e.candidate) {
       send("new-ice-candidate", peer.uuid, e.candidate);
@@ -16,7 +14,7 @@ function WebRTC(localStream, send, peer, initiator) {
 
   pc.onaddstream = (e) => {
     let screens = document.querySelector("#screens");
-    let wrap = HTMLHelper.createVideo(peer.uuid);
+    let wrap = HTMLHelper.createVideo(peer);
     screens.appendChild(wrap);
     let videoWrap = document.getElementById(peer.uuid);
     let video = videoWrap.querySelector("video");

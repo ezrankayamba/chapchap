@@ -1,12 +1,14 @@
 const HTMLHelper = {
-  createVideo: (uuid) => {
+  createVideo: (peer) => {
+    console.log(peer);
+    const { uuid, name } = peer;
     let exist = document.getElementById(uuid);
     if (exist) return exist;
     let parts = uuid.split("-");
     let template = document.createElement("template");
     let html = `
           <div id="${uuid}" class="video-wrap">
-              <p>You: ${parts[parts.length - 1]}</p>
+              <p>${name}</p>
               <video></video>
           </div>
           `;

@@ -1,6 +1,7 @@
 .main-content-wraper {
   max-height: calc(100vh - 3rem);
   overflow-y: auto;
+  padding: 0.4rem 1rem;
 }
 @media only screen and (min-width: 768px) {
   .main-layout {
@@ -11,7 +12,7 @@
   .main-content-wraper {
     width: 70%;
     margin: 0 auto;
-    padding: 0.4rem;
+
     height: 100%;
   }
 }
